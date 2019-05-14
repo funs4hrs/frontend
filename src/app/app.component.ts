@@ -3,6 +3,7 @@ import { ApiService } from './services/api.service'
 import { User } from './models/user';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { UserService } from './services/users/user.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,15 @@ import { map } from 'rxjs/operators';
 
 export class AppComponent {
   title = 'frontend'; 
+  username = 'sign in'
 
+  constructor(private userService : UserService){
+    userService.getLoggedInName.subscribe(name => this.setName(name));
+  }
+
+  private setName(name){
+    this.username = name;
+  }
 
   ngOnInit(){
     // console.log("KETA")

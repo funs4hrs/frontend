@@ -12,7 +12,12 @@ export class ApiService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getUsers(){
-    return this.httpClient.get<any>(`${this.apiURI}/users`);
+  public get(query: String){
+    return this.httpClient.get<any>(`${this.apiURI}/${query}`)
+  }
+
+  public post(query: String, data: Object, options: Object){
+    var variable = this.httpClient.post<any>(`${this.apiURI}/${query}`, data, options);
+    return variable 
   }
 }

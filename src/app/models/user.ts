@@ -1,22 +1,21 @@
 export class User {
-    Id: number;
-    FirstName: string;
-    LastName: string;
-    Email: string;
-    Password: String;
-    HourlyWage: number;
-    Adress: string;
-    City: string;
-    IsManager: boolean;
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: String;
+    hourlyWage: number;
+    adress: string;
+    city: string;
+    isManager: boolean;
 
-    constructor(FirstName: string,
-        LastName: string,
-        Email: string,
-        Password: String,
-        HourlyWage: number,
-        Adress: string,
-        City: string,
-        IsManager: boolean,){}
+    constructor(firstName: string,
+        lastName: string,
+        email: string,
+        password: String,
+        hourlyWage: number,
+        adress: string,
+        city: string,
+        isManager: boolean,){}
 
 }
 
