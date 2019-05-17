@@ -1,37 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from './models/user';
-import { UserService } from './services/users/user.service';
 import { Alert } from 'selenium-webdriver';
+import { Router, NavigationStart } from '@angular/router';
+import { AuthenticationService } from './services/AuthenticationService/authentication-service.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-
-
-
 export class AppComponent {
-  username = 'Sign in'
-  user: User;
 
-  constructor(private userService : UserService){
-    userService.getLoggedUser.subscribe((user: User) => {
-      this.setUser(user)
-    });
+  currentUser: User;
+
+  constructor(private router: Router, private authService: AuthenticationService){
+    this.authService.currentUser.subscribe(x => this.currentUser = x);
   }
 
-  private setUser(user: User){
-    this.user = user;
-    console.log(user)
-    if (user !== null && user !== undefined) {
-      this.username = `Welcome ${this.user.firstName}`;
-    } else {
-      this.username = "Sign in"
-    }
-  }
-
-  ngOnInit(){
-    this.setUser(undefined)
+  logout(){
+    this.authService.logout();
+    this.router.navigate(['/login'])
   }
 }
