@@ -37,6 +37,8 @@ export class LoginComponent implements OnInit {
 
         alert("SEND REQUEST");
 
+        console.log(this.userService)
+
         this.user = await this.userService.login(this.registerForm.value.email, this.registerForm.value.password)
 
         console.log(this.user)

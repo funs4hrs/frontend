@@ -9,7 +9,7 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class UserService {
 
-  @Output() getLoggedInName: EventEmitter<any> = new EventEmitter();
+  @Output() getLoggedUser: EventEmitter<any> = new EventEmitter();
 
   constructor(private apiService: ApiService) { }
 
@@ -28,13 +28,13 @@ export class UserService {
 
     console.log(user.firstName)
 
-    this.getLoggedInName.emit(`Welcome ${user.firstName}`)
+    this.getLoggedUser.emit(user)
 
     return user;
   }
 
   
   public logout(): void {
-    this.getLoggedInName.emit('Sign In');
+    this.getLoggedUser.emit(null);
   }
 }

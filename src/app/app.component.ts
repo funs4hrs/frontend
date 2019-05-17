@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from './services/api.service'
 import { User } from './models/user';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { UserService } from './services/users/user.service';
+import { Alert } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-root',
@@ -14,25 +12,26 @@ import { UserService } from './services/users/user.service';
 
 
 export class AppComponent {
-  title = 'frontend'; 
-  username = 'sign in'
+  username = 'Sign in'
+  user: User;
 
   constructor(private userService : UserService){
-    userService.getLoggedInName.subscribe(name => this.setName(name));
+    userService.getLoggedUser.subscribe((user: User) => {
+      this.setUser(user)
+    });
   }
 
-  private setName(name){
-    this.username = name;
+  private setUser(user: User){
+    this.user = user;
+    console.log(user)
+    if (user !== null && user !== undefined) {
+      this.username = `Welcome ${this.user.firstName}`;
+    } else {
+      this.username = "Sign in"
+    }
   }
 
   ngOnInit(){
-    // console.log("KETA")
-    // this.apiService.getUsers().subscribe((res:any) => {
-    //   console.log(typeof (res.content as User[]));
-    //   this.users = res.content as User[];
-    // });
-   
-    
-      
+    this.setUser(undefined)
   }
 }
