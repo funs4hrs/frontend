@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AlertModule } from 'ngx-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home/home.component';
+import { ProjectComponent } from './components/project/project.component';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { HomeComponent } from './components/home/home/home.component';
     AppComponent,
     LoginComponent,
     HomeComponent,
+    ProjectComponent
   ],
   imports: [
     BrowserModule,

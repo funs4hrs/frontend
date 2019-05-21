@@ -8,6 +8,10 @@ export class User {
     adress: string;
     city: string;
     isManager: boolean;
+    _links: {
+        ref:{
+            href: string;
+    }};
 
     constructor(firstName: string,
         lastName: string,
@@ -16,7 +20,10 @@ export class User {
         hourlyWage: number,
         adress: string,
         city: string,
-        isManager: boolean,){}
+        isManager: boolean,_links: {
+            ref:{
+                href: string;
+        }}){}
 
 }
 
