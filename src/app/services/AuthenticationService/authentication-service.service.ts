@@ -27,21 +27,22 @@ export class AuthenticationService {
      return this.currentUserSubject.value;
    }
 
-   async login(email: string, password: string) {
-     var result = await this.http.post<any>(`${this.apiUrl}/users/login`,{email: email,password:password}).toPromise()
-     console.log(result)
-    //  return  result.pipe(map(user => {
-    //     if(user) {
-    //       console.log(JSON.stringify(user))
-    //       localStorage.setItem('currentUser', JSON.stringify(user))
-    //       this.updateUser();
-    //     }
-    //     return user;
-    //   }))
+    login(email: string, password: string) {
+     var result = this.http.post<any>(`${this.apiUrl}/users/login`,{email: email,password:password})
+     result.subscribe(x => console.log(x))
+     return  result.pipe(map(user => {
+        if(user) {
+          console.log(JSON.stringify(user))
+          localStorage.setItem('currentUser', JSON.stringify(user))
+          this.updateUser();
+        }
+        return user;
+      }))
    }
 
    logout(){
      localStorage.removeItem('currentUser');
+     localStorage.removeItem('userProjects')
      this.currentUserSubject.next(null)
    }
 }

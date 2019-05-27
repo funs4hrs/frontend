@@ -1,7 +1,19 @@
-<p>
-  home works!
-</p>
-
-<div *ngIf="currentUser">
-  
+<div *ngIf="userProjects">
+    <table>
+        <thead>
+            <tr>
+                <th>Project name</th>
+                <th>Description</th>
+                <th>Owner</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let project of userProjects">
+                <td>{{ project.name }}</td>
+                <td>{{ project.description }}</td>
+                <td>{{ project.owner.name }}</td>
+                <td><button>Klokken</button></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
