@@ -9,12 +9,13 @@ import { User } from 'src/app/models/user';
 })
 export class ProjectService {
 
-  apiUrl = 'http://localhost:8090'
+  apiUrl = 'http://localhost:9000'
 
   constructor(private http: HttpClient) { }
 
   add(project: Project){
-    return this.http.post(`${this.apiUrl}/projects`,JSON.stringify(project))
+    console.log(JSON.stringify(project))
+    return this.http.post(`${this.apiUrl}/projects/`,JSON.stringify(project))
   }
 
   getByUser(user: User){

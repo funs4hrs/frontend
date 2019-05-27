@@ -12,7 +12,7 @@ export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<User>
   public currentUser: Observable<User>
 
-  apiUrl = 'http://localhost:8090';
+  apiUrl = 'http://localhost:9000';
 
   constructor(private http: HttpClient) {
     this.updateUser();

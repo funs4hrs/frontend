@@ -42,28 +42,50 @@ export class ProjectComponent implements AfterViewInit, OnInit {
   }
   get f() { return this.projectForm.controls}
 
-  onSubmit() {
+  // changeCity(e) {
+  //   console.log(e.value)
+  //   this.cityN.setValue(e.target.value, {
+  //   onlySelf: true
+  //   })
+  //   }
+  //   get cityName() {
+  //     return this.registrationForm.get('cityName');
+  //     }
+
+  async onSubmit() {
     this.submitted = true;
 
-    if (this.projectForm.invalid) {
-      return;
-    }
 
     this.loading = true;
 
     var project = new Project()
 
-    this.companyService.getById(this.f.company.value).subscribe(x => {
-      this.company = x as Company
-    })
+    console.log(this.f.company.value)
+
+    // this.companyService.getById(this.projectForm.get("company").value).subscribe(x => {
+    //   this.company = x as Company
+    // })
+
+    var result = await this.companyService.getById(this.projectForm.get("company").value).toPromise();
+
+    console.log(result)
 
     project.name = this.f.name.value;
     project.description = this.f.description.value;
     project.payout = this.f.payout.value;
     project.internal = this.f.internal.value;
-    project.owner = this.company
+    project.owner = result as Company
+
+    console.log("created project")
+
+    console.log(project)
+    console.log(project.owner)
 
     this.projectService.add(project)
+
+    console.log("saved project")
+
+    this.loading = false;
   }
 
 }
