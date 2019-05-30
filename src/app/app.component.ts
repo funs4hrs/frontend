@@ -12,7 +12,7 @@ import { filter } from 'rxjs/operators';
 })
 export class AppComponent {
 
-  currentUser: User;
+  private currentUser: User = new User();
 
   constructor(private router: Router, private authService: AuthenticationService){
     this.authService.currentUser.subscribe(x => this.currentUser = x);

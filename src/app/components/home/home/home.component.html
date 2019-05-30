@@ -12,7 +12,7 @@
                 <td>{{ project.name }}</td>
                 <td>{{ project.description }}</td>
                 <td>{{ project.owner.name }}</td>
-                <td><button>Klokken</button></td>
+                <td><button (click)="test(project.id)">Klokken</button></td>
             </tr>
         </tbody>
     </table>

@@ -36,6 +36,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
     });
   }
 
+  test(id){
+    console.log(id)
+    console.log(new Date().toJSON("yyyy/MM/dd HH:mm"))
+  }
 
   ngOnInit() {
     

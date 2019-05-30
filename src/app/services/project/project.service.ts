@@ -14,8 +14,7 @@ export class ProjectService {
   constructor(private http: HttpClient) { }
 
   add(project: Project){
-    console.log(JSON.stringify(project))
-    return this.http.post(`${this.apiUrl}/projects/`,JSON.stringify(project))
+    return this.http.post(`http://localhost:9000/projects/`, JSON.stringify(project))
   }
 
   getByUser(user: User){

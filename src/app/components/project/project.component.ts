@@ -81,9 +81,11 @@ export class ProjectComponent implements AfterViewInit, OnInit {
     console.log(project)
     console.log(project.owner)
 
-    this.projectService.add(project)
+    var newProj = await this.projectService.add(project).toPromise();
 
     console.log("saved project")
+
+    console.log(newProj)
 
     this.loading = false;
   }

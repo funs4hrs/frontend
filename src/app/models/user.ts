@@ -10,16 +10,6 @@ export class User {
     isManager: boolean;
     links: object;
 
-    constructor(firstName: string,
-        lastName: string,
-        email: string,
-        password: String,
-        hourlyWage: number,
-        adress: string,
-        city: string,
-        isManager: boolean,
-        links: object){}
-
 }
 
 // @Id
