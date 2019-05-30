@@ -30,7 +30,7 @@ export class AttendanceService {
   }
 
   update(attendance: Attendance) {
-    return this.http.put(`${this.apiUrl}/attendances/${attendance.id}`, attendance);
+    return this.http.put(`${this.apiUrl}/attendances/`, attendance);
 }
 
 delete(id: number) {

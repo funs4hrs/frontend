@@ -1,4 +1,4 @@
-<div *ngIf="userProjects">
+<div *ngIf="userProjects?.length > 0">
     <table>
         <thead>
             <tr>
@@ -8,12 +8,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let project of userProjects">
+            <tr *ngFor="let project of userProjects; let i = index" [attr.data-index]="i">
                 <td>{{ project.name }}</td>
                 <td>{{ project.description }}</td>
                 <td>{{ project.owner.name }}</td>
-                <td><button *ngIf="!currentAttendance" (click)="inklokken(project.id)">Klokken</button></td>
-                <td><button *ngIf="currentAttendance" (click)="uitklokken(project.id, currentAttendance.id)">Klokken</button></td>
+                <td><button *ngIf="currentAttendance?.length == 0" (click)="inklokken(project.id)">inklokken</button></td>
+                <td><button *ngIf="currentAttendance?.length > 0" (click)="uitklokken(currentAttendance[i])">uitklokken</button></td>
             </tr>
         </tbody>
     </table>

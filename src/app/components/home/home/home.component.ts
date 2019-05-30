@@ -8,6 +8,7 @@ import { Router, NavigationEnd, Event, NavigationStart } from '@angular/router';
 import { Attendance } from 'src/app/models/attendance/attendance';
 import { CompanyService } from 'src/app/services/company/company.service';
 import { Company } from 'src/app/models/company/company';
+import { AttendanceService } from 'src/app/services/attendance/attendance.service';
 
 @Component({
   selector: 'app-home',
@@ -16,37 +17,60 @@ import { Company } from 'src/app/models/company/company';
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 
-  currentAttendance: Attendance;
+  currentAttendance = [];
   currentUser: User;
   userProjects = [];
 
-  async ngAfterViewInit() {
-    console.log("test")
-    var pResult = await this.projectService.getByUser(this.currentUser).toPromise() as any
-    for (let i = 0; i < pResult._embedded.results.length; i++) {
-      var project = pResult._embedded.results[i] as Project;
-      var cResult = await this.companyService.getProjectOwner(project).toPromise() as any;
-      project.owner = cResult as Company
-      this.userProjects.push(project)
-      
-    }
-    localStorage.setItem('userProjects', JSON.stringify(this.userProjects))
-
-}
-
-
-  constructor(authService: AuthenticationService, private projectService: ProjectService, private router: Router, private companyService: CompanyService) { 
+  constructor(authService: AuthenticationService, private projectService: ProjectService, private router: Router, private companyService: CompanyService, private attendanceService: AttendanceService) { 
     authService.currentUser.subscribe((x)=> {
       this.currentUser = x;
     });
   }
 
-  inklokken(id){
+  async ngAfterViewInit() {
+    var pResult = await this.projectService.getByUser(this.currentUser).toPromise() as any
+    for (let i = 0; i < pResult._embedded.results.length; i++) {
+      var project = pResult._embedded.results[i] as Project;
+      project.owner = await this.companyService.getProjectOwner(project).toPromise() as any;
+      this.userProjects.push(project)
+
+
+      var att = await this.attendanceService.getOpenByUserAndProject(this.currentUser,project).toPromise() as Attendance;
+      att.user = this.currentUser;
+      att.project = project;
+      console.log(att)
+      this.currentAttendance.push(att);
+
+
+    }
+    localStorage.setItem('userProjects', JSON.stringify(this.userProjects))
+
+
+
+}
+
+  async inklokken(id){
     console.log(id)
-    console.log(new Date().toJSON("yyyy/MM/dd HH:mm"))
+    console.log()
+
+    var project = await this.projectService.getById(id).toPromise() as Project;
+
+    var attendance = new Attendance();
+    attendance.project = project;
+    attendance.start_time = new Date().toJSON("yyyy/MM/dd HH:mm");
+    attendance.user = this.currentUser;
+
+    await this.attendanceService.add(attendance).toPromise();
+
+    console.log("saved")
   }
-  uitklokken(projectId, attendanceId){
-    console.log(new Date().toJSON("yyyy/MM/dd HH:mm"))
+
+  async uitklokken(attendance: Attendance){
+    console.log(attendance)
+
+    attendance.end_time = new Date().toJSON("yyyy/MM/dd HH:mm");
+
+    await this.attendanceService.update(attendance).toPromise();
   }
 
   ngOnInit() {

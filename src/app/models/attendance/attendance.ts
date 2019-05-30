@@ -3,8 +3,8 @@ import { Project } from '../project/project';
 
 export class Attendance {
     id: number;
-    start_time: Date;
-    end_time: Date;
+    start_time: string;
+    end_time: string;
     user: User;
     project: Project;
 }
