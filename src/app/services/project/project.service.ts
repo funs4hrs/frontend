@@ -14,7 +14,7 @@ export class ProjectService {
   constructor(private http: HttpClient) { }
 
   add(project: Project){
-    return this.http.post(`http://localhost:9000/projects/`, JSON.stringify(project))
+    return this.http.post(`${this.apiUrl}/projects/`, JSON.stringify(project))
   }
 
   getByUser(user: User){
@@ -30,7 +30,7 @@ export class ProjectService {
   }
 
   update(project: Project) {
-    return this.http.put(`${this.apiUrl}/projects/${project.id}`, project);
+    return this.http.put(`${this.apiUrl}/projects/`, project);
   }
 
   delete(id: number) {

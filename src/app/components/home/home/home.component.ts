@@ -5,6 +5,9 @@ import { ProjectService } from 'src/app/services/project/project.service';
 import { map } from 'rxjs/operators';
 import { Project } from 'src/app/models/project/project';
 import { Router, NavigationEnd, Event, NavigationStart } from '@angular/router';
+import { Attendance } from 'src/app/models/attendance/attendance';
+import { CompanyService } from 'src/app/services/company/company.service';
+import { Company } from 'src/app/models/company/company';
 
 @Component({
   selector: 'app-home',
@@ -13,16 +16,18 @@ import { Router, NavigationEnd, Event, NavigationStart } from '@angular/router';
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 
-  
+  currentAttendance: Attendance;
   currentUser: User;
   userProjects = [];
 
   async ngAfterViewInit() {
     console.log("test")
-    var result = await this.projectService.getByUser(this.currentUser).toPromise() as any
-    console.log(result)
-    for (let i = 0; i < result._embedded.results.length; i++) {
-      this.userProjects.push(result._embedded.results[i] as Project)
+    var pResult = await this.projectService.getByUser(this.currentUser).toPromise() as any
+    for (let i = 0; i < pResult._embedded.results.length; i++) {
+      var project = pResult._embedded.results[i] as Project;
+      var cResult = await this.companyService.getProjectOwner(project).toPromise() as any;
+      project.owner = cResult as Company
+      this.userProjects.push(project)
       
     }
     localStorage.setItem('userProjects', JSON.stringify(this.userProjects))
@@ -30,14 +35,17 @@ export class HomeComponent implements OnInit, AfterViewInit {
 }
 
 
-  constructor(authService: AuthenticationService, private projectService: ProjectService, private router: Router) { 
+  constructor(authService: AuthenticationService, private projectService: ProjectService, private router: Router, private companyService: CompanyService) { 
     authService.currentUser.subscribe((x)=> {
       this.currentUser = x;
     });
   }
 
-  test(id){
+  inklokken(id){
     console.log(id)
+    console.log(new Date().toJSON("yyyy/MM/dd HH:mm"))
+  }
+  uitklokken(projectId, attendanceId){
     console.log(new Date().toJSON("yyyy/MM/dd HH:mm"))
   }
 

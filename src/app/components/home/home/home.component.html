@@ -12,7 +12,8 @@
                 <td>{{ project.name }}</td>
                 <td>{{ project.description }}</td>
                 <td>{{ project.owner.name }}</td>
-                <td><button (click)="test(project.id)">Klokken</button></td>
+                <td><button *ngIf="!currentAttendance" (click)="inklokken(project.id)">Klokken</button></td>
+                <td><button *ngIf="currentAttendance" (click)="uitklokken(project.id, currentAttendance.id)">Klokken</button></td>
             </tr>
         </tbody>
     </table>
