@@ -7,7 +7,6 @@ import { Project } from 'src/app/models/project/project';
 import { Router, NavigationEnd, Event, NavigationStart } from '@angular/router';
 import { Attendance } from 'src/app/models/attendance/attendance';
 import { CompanyService } from 'src/app/services/company/company.service';
-import { Company } from 'src/app/models/company/company';
 import { AttendanceService } from 'src/app/services/attendance/attendance.service';
 
 @Component({
@@ -29,16 +28,22 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   async ngAfterViewInit() {
     var pResult = await this.projectService.getByUser(this.currentUser).toPromise() as any
+    console.log(pResult)
     for (let i = 0; i < pResult._embedded.results.length; i++) {
       var project = pResult._embedded.results[i] as Project;
+      console.log(project)
       project.owner = await this.companyService.getProjectOwner(project).toPromise() as any;
       this.userProjects.push(project)
 
 
+      
       var att = await this.attendanceService.getOpenByUserAndProject(this.currentUser,project).toPromise() as Attendance;
+      console.log(att)
+      if(att){
       att.user = this.currentUser;
       att.project = project;
       console.log(att)
+      }
       this.currentAttendance.push(att);
 
 
@@ -62,7 +67,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     await this.attendanceService.add(attendance).toPromise();
 
-    console.log("saved")
+    window.location.reload();
   }
 
   async uitklokken(attendance: Attendance){
@@ -71,7 +76,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
     attendance.end_time = new Date().toJSON("yyyy/MM/dd HH:mm");
 
     await this.attendanceService.update(attendance).toPromise();
-  }
+
+    window.location.reload();
+    }
 
   ngOnInit() {
     

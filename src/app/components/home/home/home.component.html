@@ -12,8 +12,8 @@
                 <td>{{ project.name }}</td>
                 <td>{{ project.description }}</td>
                 <td>{{ project.owner.name }}</td>
-                <td><button *ngIf="currentAttendance?.length == 0" (click)="inklokken(project.id)">inklokken</button></td>
-                <td><button *ngIf="currentAttendance?.length > 0" (click)="uitklokken(currentAttendance[i])">uitklokken</button></td>
+                <td *ngIf="!currentAttendance[i]" ><button (click)="inklokken(project.id)">inklokken</button></td>
+                <td *ngIf="currentAttendance[i]"><button (click)="uitklokken(currentAttendance[i])">uitklokken</button></td>
             </tr>
         </tbody>
     </table>

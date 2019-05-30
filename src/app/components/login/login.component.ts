@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.f.email.value, hash)
       .pipe(first())
       .subscribe(data => {
-        this.router.navigate([this.returnUrl])
+        window.location.href = `http://${window.location.host}/home`
       },
       error => {
         console.log(error)
