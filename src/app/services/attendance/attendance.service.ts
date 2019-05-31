@@ -7,8 +7,9 @@ import { Project } from 'src/app/models/project/project';
 @Injectable({
   providedIn: 'root'
 })
-export class AttendanceService {
-  apiUrl = 'http://localhost:9000'
+export class AttendanceService {  
+  apiUrl = 'http://51.77.195.120:9000'
+
 
   constructor(private http: HttpClient) { }
 
