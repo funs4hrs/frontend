@@ -31,4 +31,4 @@ steps:
     runOptions: 'commands'
     commands: 'screen -S frontendjoris -p 0 -X stuff "^C^M"; 
       screen -S frontendjoris -X stuff "npm install^M";
-      screen -S frontendjoris -X stuff "ng host 51.77.195.120^M";'
+      screen -S frontendjoris -X stuff "ng serve --host 51.77.195.120^M";'
