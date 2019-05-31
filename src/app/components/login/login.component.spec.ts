@@ -22,4 +22,10 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-});
+
+  it('form should be valid', async() => {
+    component.loginForm.controls['email'].setValue("t@t.t");
+    component.loginForm.controls['password'].setValue("t");
+    expect(component.loginForm.valid).toBeTruthy();
+  });
+})

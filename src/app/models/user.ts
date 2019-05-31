@@ -1,4 +1,5 @@
 export class User {
+    id: number;
     firstName: string;
     lastName: string;
     email: string;
@@ -7,15 +8,7 @@ export class User {
     adress: string;
     city: string;
     isManager: boolean;
-
-    constructor(firstName: string,
-        lastName: string,
-        email: string,
-        password: String,
-        hourlyWage: number,
-        adress: string,
-        city: string,
-        isManager: boolean,){}
+    links: object;
 
 }
 
