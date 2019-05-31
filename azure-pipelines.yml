@@ -29,5 +29,5 @@ steps:
   inputs:
     sshEndpoint: 'OVH'
     runOptions: 'commands'
-    commands: 'screen -S frontendjoris-p 0 -X stuff "^C^M"; 
+    commands: 'screen -S frontendjoris -p 0 -X stuff "^C^M"; 
       screen -S frontendjoris -X stuff "ng serve^M";'
