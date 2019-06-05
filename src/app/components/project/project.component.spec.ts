@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProjectComponent } from './project.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 describe('ProjectComponent', () => {
   let component: ProjectComponent;
@@ -8,7 +10,9 @@ describe('ProjectComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProjectComponent ]
+      declarations: [ ProjectComponent ],
+      imports: [ReactiveFormsModule],
+      providers: [{provide: HttpClient}]
     })
     .compileComponents();
   }));

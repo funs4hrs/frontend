@@ -9,6 +9,7 @@ import { AlertModule } from 'ngx-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home/home.component';
 import { ProjectComponent } from './components/project/project.component';
+import { AttendanceComponent } from './components/attendance/attendance.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ProjectComponent } from './components/project/project.component';
     AppComponent,
     LoginComponent,
     HomeComponent,
-    ProjectComponent
+    ProjectComponent,
+    AttendanceComponent
   ],
   imports: [
     BrowserModule,

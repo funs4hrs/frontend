@@ -18,6 +18,10 @@ export class AttendanceService {
     return this.http.post(`http://localhost:9000/attendances/`, JSON.stringify(attendance))
   }
 
+  getAllByUser(user: User){
+    return this.http.get<Attendance[]>(`${this.apiUrl}/users/${user.id}/attendances`)
+  }
+
   getOpenByUserAndProject(user: User, project: Project){
     return this.http.get<Attendance>(`${this.apiUrl}/attendances/openByUserAndProject?user=${user.id}&project=${project.id}`)
   }
