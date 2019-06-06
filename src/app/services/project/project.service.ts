@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RequestOptions } from '@angular/http'; 
 import { Project } from 'src/app/models/project/project';
 import { User } from 'src/app/models/user';
+import { Attendance } from 'src/app/models/attendance/attendance';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,10 @@ export class ProjectService {
 
   add(project: Project){
     return this.http.post(`${this.apiUrl}/projects/`, JSON.stringify(project))
+  }
+
+  getByAttendance(attendance: Attendance) {
+    return this.http.get<any>(`${this.apiUrl}/attendances/${attendance.id}/project`)
   }
 
   getByUser(user: User){

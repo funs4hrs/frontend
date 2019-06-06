@@ -4,24 +4,23 @@ import { UserService } from 'src/app/services/User/user.service';
 import { AttendanceService } from 'src/app/services/attendance/attendance.service';
 import { User } from 'src/app/models/user';
 import { Attendance } from 'src/app/models/attendance/attendance';
+import { ProjectService } from 'src/app/services/project/project.service';
+import { Project } from 'src/app/models/project/project';
 
 @Component({
   selector: 'app-attendance',
   templateUrl: './attendance.component.html',
   styleUrls: ['./attendance.component.css']
 })
-export class AttendanceComponent implements OnInit, AfterViewInit {
+export class AttendanceComponent implements AfterViewInit {
 
   currentUser: User;
   userAttendances = []
 
-  constructor(authService: AuthenticationService,private attendanceService: AttendanceService) { 
+  constructor(authService: AuthenticationService,private attendanceService: AttendanceService, private projectService: ProjectService) { 
     authService.currentUser.subscribe((x)=> {
       this.currentUser = x;
     });
-  }
-
-  ngOnInit() {
   }
   
   async ngAfterViewInit() {
@@ -31,13 +30,11 @@ export class AttendanceComponent implements OnInit, AfterViewInit {
     for (let i = 0; i < aResult._embedded.results.length; i++) {
       var attendance = aResult._embedded.results[i] as Attendance;
 
-      var start_date = new Date(attendance.start_time).getHours();
-      var end_date = new Date(attendance.end_time).getHours();
+      var pResult = (await this.projectService.getByAttendance(attendance).toPromise() as any) as Project;
+      attendance.project = pResult;
 
-      console.log(start_date)
-
-      console.log(new Date(start_date-end_date).getHours())
-
+      attendance.start_date = new Date(attendance.start_time).toLocaleString()
+      attendance.end_date = new Date(attendance.end_time).toLocaleString()
 
       this.userAttendances.push(attendance)
     }
