@@ -8,13 +8,17 @@ import { Attendance } from 'src/app/models/attendance/attendance';
   providedIn: 'root'
 })
 export class ProjectService {
-  apiUrl = 'http://51.77.195.120:9000'
+  apiUrl = 'http://localhost:9000'
 
 
   constructor(private http: HttpClient) { }
 
   add(project: Project){
     return this.http.post(`${this.apiUrl}/projects/`, JSON.stringify(project))
+  }
+
+  join(project: Project, user: User) {
+    return this.http.post(`${this.apiUrl}/projects/${project.id}/join`,JSON.stringify(user))
   }
 
   getByAttendance(attendance: Attendance) {

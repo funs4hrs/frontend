@@ -2,28 +2,41 @@
   add-user works!
 </p>
 <div class="example-container">
-  <h2>To do</h2>
+  <h2>Users</h2>
+  <form>
+  <div class="example-list">
+    <div class="example-box" style="cursor: default" *ngFor="let item of users; let i = index" [attr.data-index]="i">
+      <label class="form-check-label" for="checkbox{{i}}">
+          {{item.firstName}} {{item.lastName}}
+      </label>
+      <input type="radio" id="checkbox{{i}}" name="user" (change)="changeCheckbox(item)">
+    </div>
+  </div>
+</form>
+</div>
 
+<div class="example-container">
+  <h2>Projects</h2>
   <div
     cdkDropList
-    #todoList="cdkDropList"
-    [cdkDropListData]="todo"
-    [cdkDropListConnectedTo]="[doneList]"
+    #userList="cdkDropList"
+    [cdkDropListData]="projects"
+    [cdkDropListConnectedTo]="[joinedList]"
     class="example-list"
     (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>
+    <div class="example-box" *ngFor="let item of projects" cdkDrag>{{item.project.name}}</div>
   </div>
 </div>
 
 <div class="example-container">
-  <h2>Done</h2>
+  <h2>Joined Projects</h2>
 
   <div
     cdkDropList
-    #doneList="cdkDropList"
-    [cdkDropListData]="done"
+    #joinedList="cdkDropList"
+    [cdkDropListData]="joinedProjects"
     class="example-list"
     (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
+    <div class="example-box" *ngFor="let item of joinedProjects" cdkDrag>{{item.project.name}}</div>
   </div>
 </div>
