@@ -5,13 +5,15 @@ import { HomeComponent } from './components/home/home/home.component';
 import { AuthGuard } from './services/authguard/auth.guard';
 import { ProjectComponent } from './components/project/project.component';
 import { AttendanceComponent } from './components/attendance/attendance.component';
+import { AddUserComponent } from './components/add-user/add-user.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home',pathMatch: 'full'},
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent },
   { path: 'project', component: ProjectComponent, canActivate: [AuthGuard] },
-  { path: 'attendance', component: AttendanceComponent, canActivate: [AuthGuard] }
+  { path: 'attendance', component: AttendanceComponent, canActivate: [AuthGuard] },
+  { path: 'add-user', component: AddUserComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home/home.component';
 import { ProjectComponent } from './components/project/project.component';
 import { AttendanceComponent } from './components/attendance/attendance.component';
+import { AddUserComponent } from './components/add-user/add-user.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { AttendanceComponent } from './components/attendance/attendance.componen
     LoginComponent,
     HomeComponent,
     ProjectComponent,
-    AttendanceComponent
+    AttendanceComponent,
+    AddUserComponent
   ],
   imports: [
     BrowserModule,
