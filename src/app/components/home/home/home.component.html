@@ -1,10 +1,11 @@
 <div *ngIf="userProjects?.length > 0">
-    <table>
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Project name</th>
                 <th>Description</th>
                 <th>Owner</th>
+                <th>Klokken</th>
             </tr>
         </thead>
         <tbody>
@@ -12,8 +13,8 @@
                 <td>{{ project.name }}</td>
                 <td>{{ project.description }}</td>
                 <td>{{ project.owner.name }}</td>
-                <td *ngIf="!currentAttendance[i]" ><button (click)="inklokken(project.id)">inklokken</button></td>
-                <td *ngIf="currentAttendance[i]"><button (click)="uitklokken(currentAttendance[i])">uitklokken</button></td>
+                <td *ngIf="!currentAttendance[i]" ><button class="btn btn-primary" (click)="inklokken(project.id)">inklokken</button></td>
+                <td *ngIf="currentAttendance[i]"><button class="btn btn-primary"  (click)="uitklokken(currentAttendance[i])">uitklokken</button></td>
             </tr>
         </tbody>
     </table>

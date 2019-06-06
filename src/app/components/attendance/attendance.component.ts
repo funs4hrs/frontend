@@ -1,6 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/AuthenticationService/authentication-service.service';
-import { UserService } from 'src/app/services/User/user.service';
 import { AttendanceService } from 'src/app/services/attendance/attendance.service';
 import { User } from 'src/app/models/user';
 import { Attendance } from 'src/app/models/attendance/attendance';
@@ -33,8 +32,14 @@ export class AttendanceComponent implements AfterViewInit {
       var pResult = (await this.projectService.getByAttendance(attendance).toPromise() as any) as Project;
       attendance.project = pResult;
 
-      attendance.start_date = new Date(attendance.start_time).toLocaleString()
-      attendance.end_date = new Date(attendance.end_time).toLocaleString()
+      var start_date = new Date(attendance.start_time);
+      var end_date = new Date(attendance.end_time);
+
+
+      attendance.time_worked = (Math.round((end_date.getTime() - start_date.getTime())/(3600*1000)))
+
+      attendance.start_date = start_date.toLocaleString()
+      attendance.end_date = end_date.toLocaleString()
 
       this.userAttendances.push(attendance)
     }

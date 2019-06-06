@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { RequestOptions } from '@angular/http'; 
 import { Project } from 'src/app/models/project/project';
 import { User } from 'src/app/models/user';
 import { Attendance } from 'src/app/models/attendance/attendance';
@@ -25,7 +24,7 @@ export class ProjectService {
   getByUser(user: User){
     return this.http.get<any>(`${this.apiUrl}/users/${user.id}/projects`)
   }
-
+ 
   getAll() {
     return this.http.get<Project[]>(`${this.apiUrl}/projects`)
   }

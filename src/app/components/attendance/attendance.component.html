@@ -1,10 +1,11 @@
 <div *ngIf="userAttendances?.length > 0">
-  <table>
+  <table class="table table-striped">
       <thead>
           <tr>
               <th>Project name</th>
               <th>Start time</th>
               <th>End time</th>
+              <th>Time worked</th>
           </tr>
       </thead>
       <tbody>
@@ -12,6 +13,7 @@
               <td>{{ attendance.project.name }}</td>
               <td>{{ attendance.start_date }}</td>
               <td>{{ attendance.end_date }}</td>
+              <td>{{ attendance.time_worked }} Hours</td>
           </tr>
       </tbody>
   </table>
