@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { User } from 'src/app/models/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/AuthenticationService/authentication-service.service';
 import { first } from 'rxjs/operators';
@@ -50,10 +49,7 @@ export class LoginComponent implements OnInit {
 
     var forge = require('node-forge')
 
-     var md = forge.md.sha256.create();
-// md.update('The quick brown fox jumps over the lazy dog');
-// console.log(md.digest().toHex());
-// output: d7a8fbb307d7809469ca9abcb0082e4f8d5651e46d3cdb762d02d0bf37c9e592
+    var md = forge.md.sha256.create();
 
     md.update(this.f.password.value)
 
@@ -63,6 +59,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.f.email.value, hash)
       .pipe(first())
       .subscribe(data => {
+        this.loading = false;
         window.location.href = `http://${window.location.host}/home`
       },
       error => {

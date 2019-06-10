@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { CdkDragDrop, moveItemInArray, transferArrayItem, CdkDrag, CdkDropList } from "@angular/cdk/drag-drop";
 import { AddUserComponent } from './add-user.component';
+import { HttpClient } from '@angular/common/http';
 
 describe('AddUserComponent', () => {
   let component: AddUserComponent;
@@ -8,7 +10,9 @@ describe('AddUserComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddUserComponent ]
+      declarations: [ AddUserComponent, CdkDropList],
+      imports: [],
+      providers: [{provide: HttpClient}]
     })
     .compileComponents();
   }));

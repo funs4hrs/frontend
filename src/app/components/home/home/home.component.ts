@@ -17,7 +17,7 @@ import { AttendanceService } from 'src/app/services/attendance/attendance.servic
 export class HomeComponent implements OnInit, AfterViewInit {
 
   currentAttendance = [];
-  currentUser: User;
+  currentUser: User = new User();
   userProjects = [];
 
   constructor(authService: AuthenticationService, private projectService: ProjectService, private router: Router, private companyService: CompanyService, private attendanceService: AttendanceService) { 

@@ -1,8 +1,10 @@
 import { AppPage } from './app.po';
 import { browser, logging } from 'protractor';
+import { LoginComponent } from 'src/app/components/login/login.component';
 
 describe('workspace-project App', () => {
   let page: AppPage;
+  let EC = browser.ExpectedConditions;
 
   beforeEach(() => {
     page = new AppPage();
@@ -10,7 +12,17 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to frontend!');
+    expect(page.getTitleText()).toEqual('Login');
+  });
+
+  it('should login with user t@t.t', () => {
+    page.navigateTo();
+    page.getFieldEmail().sendKeys("t@t.t");
+    page.getFieldPassword().sendKeys("t");
+    page.getLoginButton().click();
+    
+
+    expect(browser.getLocationAbsUrl()).toMatch("/home");
   });
 
   afterEach(async () => {

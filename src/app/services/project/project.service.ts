@@ -8,7 +8,7 @@ import { Attendance } from 'src/app/models/attendance/attendance';
   providedIn: 'root'
 })
 export class ProjectService {
-  apiUrl = 'http://localhost:9000'
+  apiUrl = 'http://51.77.195.120:9000'
 
 
   constructor(private http: HttpClient) { }
