@@ -24,7 +24,7 @@ steps:
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(system.defaultworkingdirectory)'
-    Contents: '**/**'
+    Contents: '**/** \n !node_modules/**'
     TargetFolder: '$(build.artifactstagingdirectory)'
 
 - task: CopyFilesOverSSH@0
