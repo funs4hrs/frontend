@@ -18,7 +18,6 @@ steps:
 
 - script: |
     npm install
-    ng build --prod
   displayName: 'npm install and build'
 
   
