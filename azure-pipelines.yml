@@ -24,14 +24,18 @@ steps:
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(system.defaultworkingdirectory)'
-    Contents: '**/** \r\n !node_modules'
+    Contents: |
+     **/*
+     !node_modules/**/*
     TargetFolder: '$(build.artifactstagingdirectory)'
 
 - task: CopyFilesOverSSH@0
   inputs:
     sshEndpoint: 'OVH'
     sourceFolder: '$(build.artifactstagingdirectory)'
-    contents: '**/** \r\n !node_modules'
+    contents: |
+     **/*
+     !node_modules/**/*
     targetFolder: '/root/desktop/Joris/Angular'
     cleanTargetFolder: true
     
