@@ -31,7 +31,7 @@ steps:
   inputs:
     sshEndpoint: 'OVH'
     sourceFolder: '$(build.artifactstagingdirectory)'
-    contents: '**/** \n !node_modules/**'
+    contents: '**/** \n !node_modules'
     targetFolder: '/root/desktop/Joris/Angular'
     cleanTargetFolder: true
     
