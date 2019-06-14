@@ -17,7 +17,7 @@ import { AttendanceService } from 'src/app/services/attendance/attendance.servic
 export class HomeComponent implements OnInit, AfterViewInit {
 
   currentAttendance = [];
-  currentUser: User;
+  currentUser: User = new User();
   userProjects = [];
 
   constructor(authService: AuthenticationService, private projectService: ProjectService, private router: Router, private companyService: CompanyService, private attendanceService: AttendanceService) { 
@@ -28,21 +28,17 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   async ngAfterViewInit() {
     var pResult = await this.projectService.getByUser(this.currentUser).toPromise() as any
-    console.log(pResult)
     for (let i = 0; i < pResult._embedded.results.length; i++) {
       var project = pResult._embedded.results[i] as Project;
-      console.log(project)
       project.owner = await this.companyService.getProjectOwner(project).toPromise() as any;
       this.userProjects.push(project)
 
 
       
       var att = await this.attendanceService.getOpenByUserAndProject(this.currentUser,project).toPromise() as Attendance;
-      console.log(att)
       if(att){
       att.user = this.currentUser;
       att.project = project;
-      console.log(att)
       }
       this.currentAttendance.push(att);
 
@@ -55,8 +51,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
 }
 
   async inklokken(id){
-    console.log(id)
-    console.log()
 
     var project = await this.projectService.getById(id).toPromise() as Project;
 
@@ -67,17 +61,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     await this.attendanceService.add(attendance).toPromise();
 
-    window.location.reload();
+    this.router.navigate(['home'])
   }
 
   async uitklokken(attendance: Attendance){
-    console.log(attendance)
 
     attendance.end_time = new Date().toJSON("yyyy/MM/dd HH:mm");
 
     await this.attendanceService.update(attendance).toPromise();
 
-    window.location.reload();
+    this.router.navigate(['home'])
     }
 
   ngOnInit() {

@@ -11,8 +11,8 @@ export class AuthenticationService {
 
   private currentUserSubject: BehaviorSubject<User>
   public currentUser: Observable<User>
+  apiUrl = 'http://51.77.195.120:9000'
 
-  apiUrl = 'http://localhost:9000';
 
   constructor(private http: HttpClient) {
     this.updateUser();

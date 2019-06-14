@@ -4,6 +4,7 @@ import { ProjectService } from 'src/app/services/project/project.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Project } from 'src/app/models/project/project';
 import { Company } from 'src/app/models/company/company';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-project',
@@ -11,7 +12,7 @@ import { Company } from 'src/app/models/company/company';
   styleUrls: ['./project.component.css']
 })
 export class ProjectComponent implements AfterViewInit, OnInit {
-  constructor(private companyService: CompanyService, private projectService: ProjectService, private formBuilder: FormBuilder) { }
+  constructor(private companyService: CompanyService, private projectService: ProjectService, private formBuilder: FormBuilder, private router: Router) { }
   projectForm: FormGroup;
   loading = false;
   submitted = false;
@@ -82,6 +83,8 @@ export class ProjectComponent implements AfterViewInit, OnInit {
     console.log(project.owner)
 
     var newProj = await this.projectService.add(project).toPromise();
+
+    this.router.navigate(['/add-user'])
 
     console.log("saved project")
 
