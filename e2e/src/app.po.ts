@@ -1,24 +1,30 @@
 import { browser, by, element } from 'protractor';
 
 export class AppPage {
-  navigateTo() {
-    return browser.get(browser.baseUrl+"/login") as Promise<any>;
+
+  async navigateToHome() {
+    element(by.className('home')).click();
   }
 
-  getTitleText() {
-    return element(by.css(".title")).getText() as Promise<string>;
+  navigateTo(page: string) {
+    return browser.get(browser.baseUrl+page) as Promise<any>;
   }
 
-  getFieldPassword(){
-    return element(by.css("input[formControlName=password]"));
+  getAllNavbarButtons(){
+    return element.all(by.className("routerlink"))
   }
 
-  getFieldEmail(){
-    return element(by.css("input[formControlName=email]"));
+  getAttendanceButton(){
+    return element(by.className("attendance"))
+  }
+  
+
+  getProjectButton(){
+    return element(by.className("project"))
   }
 
-  getLoginButton(){
-    return element(by.id('loginBtn'));
-  }
+  getAddUserButton(){
+    return element(by.className("add-user"))
 
+  }
 }

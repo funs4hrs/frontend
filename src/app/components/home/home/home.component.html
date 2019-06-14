@@ -9,12 +9,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let project of userProjects; let i = index" [attr.data-index]="i">
+            <tr *ngFor="let project of userProjects; let i = index" [attr.data-index]="i" class="kaas">
                 <td>{{ project.name }}</td>
                 <td>{{ project.description }}</td>
                 <td>{{ project.owner.name }}</td>
-                <td *ngIf="!currentAttendance[i]" ><button class="btn btn-primary" (click)="inklokken(project.id)">inklokken</button></td>
-                <td *ngIf="currentAttendance[i]"><button class="btn btn-primary"  (click)="uitklokken(currentAttendance[i])">uitklokken</button></td>
+                <td *ngIf="!currentAttendance[i]"><button class="btn btn-primary" (click)="inklokken(project.id)">inklokken</button></td>
+                <td *ngIf="currentAttendance[i]"><button class="btn btn-primary" (click)="uitklokken(currentAttendance[i])">uitklokken</button></td>
             </tr>
         </tbody>
     </table>

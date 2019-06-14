@@ -61,7 +61,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     await this.attendanceService.add(attendance).toPromise();
 
-    window.location.reload();
+    this.router.navigate(['home'])
   }
 
   async uitklokken(attendance: Attendance){
@@ -70,7 +70,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     await this.attendanceService.update(attendance).toPromise();
 
-    window.location.reload();
+    this.router.navigate(['home'])
     }
 
   ngOnInit() {

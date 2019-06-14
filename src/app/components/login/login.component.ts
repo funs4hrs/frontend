@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(data => {
         this.loading = false;
-        window.location.href = `http://${window.location.host}/home`
+        this.router.navigate(['/home'])
       },
       error => {
         console.log(error)
